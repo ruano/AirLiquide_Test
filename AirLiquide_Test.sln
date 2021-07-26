@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirLiquide_Test.API", "AirLiquide_Test.API\AirLiquide_Test.API.csproj", "{627A6057-9135-4488-8A6F-D43E7168D083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirLiquide_Test.Domain", "AirLiquide_Test.Domain\AirLiquide_Test.Domain.csproj", "{EBB96143-2AED-4C7A-A3DE-3CE92D98C8CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirLiquide_Test.Database", "AirLiquide_Test.Database\AirLiquide_Test.Database.csproj", "{E07A04B2-72EB-47EC-8B1B-6BC5B1285DCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{627A6057-9135-4488-8A6F-D43E7168D083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{627A6057-9135-4488-8A6F-D43E7168D083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{627A6057-9135-4488-8A6F-D43E7168D083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{627A6057-9135-4488-8A6F-D43E7168D083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB96143-2AED-4C7A-A3DE-3CE92D98C8CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB96143-2AED-4C7A-A3DE-3CE92D98C8CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB96143-2AED-4C7A-A3DE-3CE92D98C8CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB96143-2AED-4C7A-A3DE-3CE92D98C8CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E07A04B2-72EB-47EC-8B1B-6BC5B1285DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E07A04B2-72EB-47EC-8B1B-6BC5B1285DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E07A04B2-72EB-47EC-8B1B-6BC5B1285DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E07A04B2-72EB-47EC-8B1B-6BC5B1285DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5836E056-16BE-43C9-8B75-B41E991C2644}
+	EndGlobalSection
+EndGlobal
