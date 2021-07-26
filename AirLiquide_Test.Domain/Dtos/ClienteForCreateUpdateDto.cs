@@ -1,4 +1,4 @@
-﻿namespace AirLiquide_Test.API.Dtos
+﻿namespace AirLiquide_Test.Domain.Dtos
 {
     public class ClienteForCreateUpdateDto
     {

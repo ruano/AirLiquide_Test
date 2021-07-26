@@ -1,7 +1,10 @@
-﻿using AirLiquide_Test.API.Dtos;
+﻿using AirLiquide_Test.Domain.Dtos;
 using AirLiquide_Test.Domain.Interfaces;
+using AirLiquide_Test.Domain.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace AirLiquide_Test.API.Controllers
 {
@@ -17,15 +20,24 @@ namespace AirLiquide_Test.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get([StringLength(36, ErrorMessage = "Valor GUID inválido", MinimumLength = 36)] string id)
         {
-            throw new NotImplementedException();
+            ClienteResponse clienteResponse = await _clienteService.Get(id);
+
+            if (!clienteResponse.Success)
+            {
+                return NotFound(clienteResponse.Message);
+            }
+
+            return Ok(clienteResponse.Resource);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] ClienteForCreateUpdateDto clienteForCreateDto)
+        public async Task<IActionResult> Post([FromBody] ClienteForCreateUpdateDto clienteForCreateDto)
         {
-            throw new NotImplementedException();
+            ClienteResponse clienteResponse = await _clienteService.Add(clienteForCreateDto);
+
+            return CreatedAtAction(nameof(Post), clienteResponse.Resource);
         }
 
         [HttpPut("{id}")]

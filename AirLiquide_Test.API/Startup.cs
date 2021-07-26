@@ -1,8 +1,10 @@
 using AirLiquide_Test.API.Services;
+using AirLiquide_Test.Database;
 using AirLiquide_Test.Database.Repositories;
 using AirLiquide_Test.Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,6 +24,8 @@ namespace AirLiquide_Test.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=airliquide;User Id=sa;Password=sa;"));
+
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteService, ClienteService>();
 
