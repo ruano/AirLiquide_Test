@@ -8,7 +8,7 @@ namespace AirLiquide_Test.Domain.Interfaces
     {
         Task<ClienteResponse> Add(ClienteForCreateUpdateDto clienteForCreateDto);
         Task<ClienteResponse> Get(string id);
-        ClienteResponse Remove(string id);
-        ClienteResponse Update(ClienteForCreateUpdateDto clienteForUpdateDto);
+        Task<ClienteResponse> Remove(string id);
+        Task<ClienteResponse> Update(string id, ClienteForCreateUpdateDto clienteForUpdateDto);
     }
 }

@@ -2,7 +2,6 @@
 using AirLiquide_Test.Domain.Entities;
 using AirLiquide_Test.Domain.Interfaces;
 using AirLiquide_Test.Domain.Responses;
-using System;
 using System.Threading.Tasks;
 
 namespace AirLiquide_Test.API.Services
@@ -27,6 +26,11 @@ namespace AirLiquide_Test.API.Services
 
         public async Task<ClienteResponse> Add(ClienteForCreateUpdateDto clienteForCreateDto)
         {
+            if (await _clienteRepository.FindByNameAsync(clienteForCreateDto.Nome) != null)
+            {
+                return new ClienteResponse($"Cliente com o nome {clienteForCreateDto.Nome} já existe na base de dados.");
+            }
+
             Cliente cliente = new(clienteForCreateDto.Nome, clienteForCreateDto.Idade);
 
             await _clienteRepository.AddOneAsync(cliente);
@@ -34,14 +38,41 @@ namespace AirLiquide_Test.API.Services
             return new ClienteResponse(cliente);
         }
 
-        public ClienteResponse Update(ClienteForCreateUpdateDto clienteForUpdateDto)
+        public async Task<ClienteResponse> Update(string id, ClienteForCreateUpdateDto clienteForUpdateDto)
         {
-            throw new NotImplementedException();
+            Cliente cliente = await _clienteRepository.FindByIdAsync(id);
+
+            if (cliente == null)
+            {
+                return new ClienteResponse("Cliente não encontrado.");
+            }
+
+            if (!cliente.Nome.Equals(clienteForUpdateDto.Nome))
+            {
+                if (await _clienteRepository.FindByNameAsync(clienteForUpdateDto.Nome) != null)
+                {
+                    return new ClienteResponse($"Cliente com o nome {clienteForUpdateDto.Nome} já existe na base de dados.");
+                }
+            }
+
+            cliente.Update(clienteForUpdateDto);
+            await _clienteRepository.UpdateOneAsync(cliente);
+
+            return new ClienteResponse(cliente);
         }
 
-        public ClienteResponse Remove(string id)
+        public async Task<ClienteResponse> Remove(string id)
         {
-            throw new NotImplementedException();
+            Cliente cliente = await _clienteRepository.FindByIdAsync(id);
+
+            if (cliente == null)
+            {
+                return new ClienteResponse("Cliente não encontrado.");
+            }
+
+            await _clienteRepository.RemoveOneAsync(cliente);
+
+            return new ClienteResponse((Cliente)null);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace AirLiquide_Test.Domain.Interfaces
     {
         Task AddOneAsync(Cliente cliente);
         Task<Cliente> FindByIdAsync(string id);
+        Task<Cliente> FindByNameAsync(string name);
         Task RemoveOneAsync(Cliente cliente);
         Task UpdateOneAsync(Cliente cliente);
     }

@@ -1,8 +1,8 @@
-﻿using AirLiquide_Test.Domain.Dtos;
+﻿using AirLiquide_Test.API.Configuration.ErrorResponses;
+using AirLiquide_Test.Domain.Dtos;
 using AirLiquide_Test.Domain.Interfaces;
 using AirLiquide_Test.Domain.Responses;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -10,6 +10,7 @@ namespace AirLiquide_Test.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
@@ -20,16 +21,16 @@ namespace AirLiquide_Test.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([StringLength(36, ErrorMessage = "Valor GUID inválido", MinimumLength = 36)] string id)
+        public async Task<IActionResult> Get([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id)
         {
             ClienteResponse clienteResponse = await _clienteService.Get(id);
 
             if (!clienteResponse.Success)
             {
-                return NotFound(clienteResponse.Message);
+                return NotFound(new ErrorResponse(clienteResponse.Message));
             }
 
-            return Ok(clienteResponse.Resource);
+            return Ok(new ClienteForDetailsDto(clienteResponse.Resource));
         }
 
         [HttpPost]
@@ -37,19 +38,38 @@ namespace AirLiquide_Test.API.Controllers
         {
             ClienteResponse clienteResponse = await _clienteService.Add(clienteForCreateDto);
 
-            return CreatedAtAction(nameof(Post), clienteResponse.Resource);
+            if (!clienteResponse.Success)
+            {
+                return Conflict(new ErrorResponse(clienteResponse.Message));
+            }
+
+            return CreatedAtAction(nameof(Post), new ClienteForDetailsDto(clienteResponse.Resource));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody] ClienteForCreateUpdateDto clienteForUpdateDto)
+        public async Task<IActionResult> Put([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id, [FromBody] ClienteForCreateUpdateDto clienteForUpdateDto)
         {
-            throw new NotImplementedException();
+            ClienteResponse clienteResponse = await _clienteService.Update(id, clienteForUpdateDto);
+
+            if (!clienteResponse.Success)
+            {
+                return UnprocessableEntity(new ErrorResponse(clienteResponse.Message));
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id)
         {
-            throw new NotImplementedException();
+            ClienteResponse clienteResponse = await _clienteService.Remove(id);
+
+            if (!clienteResponse.Success)
+            {
+                return NotFound(new ErrorResponse(clienteResponse.Message));
+            }
+
+            return NoContent();
         }
     }
 }
