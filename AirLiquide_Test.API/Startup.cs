@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 
 namespace AirLiquide_Test.API
 {
@@ -32,7 +33,13 @@ namespace AirLiquide_Test.API
             services.AddScoped<IClienteService, ClienteService>();
 
             services.AddControllers().ConfigureApiBehaviorOptions(opt => opt.InvalidModelStateResponseFactory = actionContext => new BadRequestObjectResult(new CustomBadRequestResponse(actionContext)));
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "AirLiquide_Test.API", Version = "v1" }));
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AirLiquide_Test.API", Version = "v1" });
+
+                string filePath = Path.Combine(System.AppContext.BaseDirectory, "AirLiquide_Test.API.xml");
+                c.IncludeXmlComments(filePath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

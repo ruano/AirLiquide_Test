@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AirLiquide_Test.API</name>
+    </assembly>
+    <members>
+        <member name="M:AirLiquide_Test.API.Controllers.ClientesController.Get(System.String)">
+            <summary>
+            Retorna um cliente com base no ID
+            </summary>
+            <param name="id"></param>
+            <response code="200">Dados do cliente</response>
+            <response code="400">ID informado inválido</response>
+            <response code="404">Cliente não encontrado</response>
+        </member>
+    </members>
+</doc>
