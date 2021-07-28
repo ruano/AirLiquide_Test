@@ -1,4 +1,5 @@
 using AirLiquide_Test.API.Configuration.ErrorResponses;
+using AirLiquide_Test.API.Configuration.Extensions;
 using AirLiquide_Test.API.Services;
 using AirLiquide_Test.Database;
 using AirLiquide_Test.Database.Repositories;
@@ -49,6 +50,8 @@ namespace AirLiquide_Test.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureExceptionHandler();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AirLiquide_Test.API v1"));

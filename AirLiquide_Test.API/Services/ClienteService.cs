@@ -2,6 +2,7 @@
 using AirLiquide_Test.Domain.Entities;
 using AirLiquide_Test.Domain.Interfaces;
 using AirLiquide_Test.Domain.Responses;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -10,14 +11,18 @@ namespace AirLiquide_Test.API.Services
     public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly ILogger<ClienteService> _logger;
 
-        public ClienteService(IClienteRepository clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, ILogger<ClienteService> logger)
         {
             _clienteRepository = clienteRepository;
+            _logger = logger;
         }
 
         public async Task<ClienteResponse> Get(string id)
         {
+            _logger.LogDebug($"Obtendo cliente ID '{id}'");
+
             Cliente cliente = await _clienteRepository.FindByIdAsync(Guid.Parse(id));
 
             return cliente == null
@@ -31,6 +36,8 @@ namespace AirLiquide_Test.API.Services
             {
                 return new ClienteResponse($"Cliente com o nome {clienteForCreateDto.Nome} já existe na base de dados.");
             }
+
+            _logger.LogDebug($"Criação do cliente '{clienteForCreateDto.Nome}'");
 
             Cliente cliente = new(clienteForCreateDto.Nome, clienteForCreateDto.Idade);
 
@@ -56,6 +63,8 @@ namespace AirLiquide_Test.API.Services
                 }
             }
 
+            _logger.LogDebug($"Atualização do cliente '{clienteForUpdateDto.Nome}'");
+
             cliente.Update(clienteForUpdateDto);
             await _clienteRepository.UpdateOneAsync(cliente);
 
@@ -70,6 +79,8 @@ namespace AirLiquide_Test.API.Services
             {
                 return new ClienteResponse("Cliente não encontrado.");
             }
+
+            _logger.LogDebug($"Atualização do cliente ID '{id}'");
 
             await _clienteRepository.RemoveOneAsync(cliente);
 
