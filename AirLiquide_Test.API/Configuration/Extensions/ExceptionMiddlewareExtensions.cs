@@ -20,8 +20,12 @@ namespace AirLiquide_Test.API.Configuration.Extensions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
-                        ErrorResponse errorResponse = new(contextFeature.Error.Message);
-                        string response = JsonConvert.SerializeObject(errorResponse);
+                        ErrorResource erroResource = new(contextFeature.Error.Message);
+                        JsonSerializerSettings options = new()
+                        {
+                            DefaultValueHandling = DefaultValueHandling.Ignore
+                        };
+                        string response = JsonConvert.SerializeObject(erroResource, options);
 
                         await context.Response.WriteAsync(response);
                     }

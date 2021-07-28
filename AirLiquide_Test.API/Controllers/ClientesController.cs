@@ -36,15 +36,15 @@ namespace AirLiquide_Test.API.Controllers
         /// <response code="404">Cliente não encontrado</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ClienteForDetailsDto), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id)
         {
             ClienteResponse clienteResponse = await _clienteService.Get(id);
 
             if (!clienteResponse.Success)
             {
-                return NotFound(new ErrorResponse(clienteResponse.Message));
+                return NotFound(new ErrorResource(clienteResponse.Message));
             }
 
             return Ok(new ClienteForDetailsDto(clienteResponse.Resource));
@@ -69,15 +69,15 @@ namespace AirLiquide_Test.API.Controllers
         /// <response code="409">Erro no processo de criação do cliente</response>
         [HttpPost]
         [ProducesResponseType(typeof(ClienteForDetailsDto), (int)HttpStatusCode.Created)]
-        [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.Conflict)]
         public async Task<IActionResult> Post([FromBody] ClienteForCreateUpdateDto clienteForCreateDto)
         {
             ClienteResponse clienteResponse = await _clienteService.Create(clienteForCreateDto);
 
             if (!clienteResponse.Success)
             {
-                return Conflict(new ErrorResponse(clienteResponse.Message));
+                return Conflict(new ErrorResource(clienteResponse.Message));
             }
 
             return CreatedAtAction(nameof(Post), new ClienteForDetailsDto(clienteResponse.Resource));
@@ -103,15 +103,15 @@ namespace AirLiquide_Test.API.Controllers
         /// <response code="422">Erro no processo de atualização do cliente</response>
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.UnprocessableEntity)]
         public async Task<IActionResult> Put([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id, [FromBody] ClienteForCreateUpdateDto clienteForUpdateDto)
         {
             ClienteResponse clienteResponse = await _clienteService.Update(id, clienteForUpdateDto);
 
             if (!clienteResponse.Success)
             {
-                return UnprocessableEntity(new ErrorResponse(clienteResponse.Message));
+                return UnprocessableEntity(new ErrorResource(clienteResponse.Message));
             }
 
             return NoContent();
@@ -132,15 +132,15 @@ namespace AirLiquide_Test.API.Controllers
         /// <response code="404">Cliente não encontrado</response>
         [HttpDelete("{id}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorResource), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Delete([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id)
         {
             ClienteResponse clienteResponse = await _clienteService.Remove(id);
 
             if (!clienteResponse.Success)
             {
-                return NotFound(new ErrorResponse(clienteResponse.Message));
+                return NotFound(new ErrorResource(clienteResponse.Message));
             }
 
             return NoContent();

@@ -33,7 +33,7 @@ namespace AirLiquide_Test.API
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteService, ClienteService>();
 
-            services.AddControllers().ConfigureApiBehaviorOptions(opt => opt.InvalidModelStateResponseFactory = actionContext => new BadRequestObjectResult(new CustomBadRequestResponse(actionContext)));
+            services.AddControllers().ConfigureApiBehaviorOptions(opt => opt.InvalidModelStateResponseFactory = actionContext => new BadRequestObjectResult(new ErrorResource(actionContext)));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AirLiquide_Test.API", Version = "v1" });
