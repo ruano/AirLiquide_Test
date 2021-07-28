@@ -1,5 +1,5 @@
 ﻿using AirLiquide_Test.Domain.Dtos;
-using AirLiquide_Test.Domain.Responses;
+using AirLiquide_Test.Domain.Services.Responses;
 using System.Threading.Tasks;
 
 namespace AirLiquide_Test.Domain.Interfaces

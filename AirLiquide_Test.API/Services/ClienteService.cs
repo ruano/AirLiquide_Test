@@ -1,7 +1,7 @@
 ﻿using AirLiquide_Test.Domain.Dtos;
 using AirLiquide_Test.Domain.Entities;
 using AirLiquide_Test.Domain.Interfaces;
-using AirLiquide_Test.Domain.Responses;
+using AirLiquide_Test.Domain.Services.Responses;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;

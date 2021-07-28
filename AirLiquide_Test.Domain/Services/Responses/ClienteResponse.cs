@@ -1,6 +1,6 @@
 ﻿using AirLiquide_Test.Domain.Entities;
 
-namespace AirLiquide_Test.Domain.Responses
+namespace AirLiquide_Test.Domain.Services.Responses
 {
     public class ClienteResponse : BaseResponse<Cliente>
     {

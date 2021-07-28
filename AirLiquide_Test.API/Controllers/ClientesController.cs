@@ -2,16 +2,17 @@
 using AirLiquide_Test.API.Configuration.Validations;
 using AirLiquide_Test.Domain.Dtos;
 using AirLiquide_Test.Domain.Interfaces;
-using AirLiquide_Test.Domain.Responses;
+using AirLiquide_Test.Domain.Services.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace AirLiquide_Test.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Produces("application/json")]
+    [Produces(MediaTypeNames.Application.Json)]
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;

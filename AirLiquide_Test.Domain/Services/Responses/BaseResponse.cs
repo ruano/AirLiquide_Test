@@ -1,4 +1,4 @@
-﻿namespace AirLiquide_Test.Domain.Responses
+﻿namespace AirLiquide_Test.Domain.Services.Responses
 {
     public abstract class BaseResponse<T>
     {
