@@ -24,7 +24,7 @@ namespace AirLiquide_Test.API.Services
                 : new ClienteResponse(cliente);
         }
 
-        public async Task<ClienteResponse> Add(ClienteForCreateUpdateDto clienteForCreateDto)
+        public async Task<ClienteResponse> Create(ClienteForCreateUpdateDto clienteForCreateDto)
         {
             if (await _clienteRepository.FindByNameAsync(clienteForCreateDto.Nome) != null)
             {

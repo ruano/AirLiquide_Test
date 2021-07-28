@@ -11,8 +11,8 @@ namespace AirLiquide_Test.Domain.Dtos
             Idade = cliente.Idade;
         }
 
-        public string Id { get; set; }
-        public string Nome { get; set; }
-        public int Idade { get; set; }
+        public string Id { get; private set; }
+        public string Nome { get; private set; }
+        public int Idade { get; private set; }
     }
 }

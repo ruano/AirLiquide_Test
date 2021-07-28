@@ -6,7 +6,7 @@ namespace AirLiquide_Test.Domain.Interfaces
 {
     public interface IClienteService
     {
-        Task<ClienteResponse> Add(ClienteForCreateUpdateDto clienteForCreateDto);
+        Task<ClienteResponse> Create(ClienteForCreateUpdateDto clienteForCreateDto);
         Task<ClienteResponse> Get(string id);
         Task<ClienteResponse> Remove(string id);
         Task<ClienteResponse> Update(string id, ClienteForCreateUpdateDto clienteForUpdateDto);

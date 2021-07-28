@@ -5,13 +5,73 @@
     </assembly>
     <members>
         <member name="M:AirLiquide_Test.API.Controllers.ClientesController.Get(System.String)">
-            <summary>
-            Retorna um cliente com base no ID
-            </summary>
-            <param name="id"></param>
-            <response code="200">Dados do cliente</response>
-            <response code="400">ID informado inválido</response>
-            <response code="404">Cliente não encontrado</response>
+             <summary>
+             Retorna um cliente com base no ID
+             </summary>
+             <remarks>
+             Exemplo do request:
+            
+                 GET /api/clientes/b50adf00-4808-4240-9ec6-e86bd8c7b9cb
+            
+             </remarks>
+             <param name="id">Identificador único do cliente</param>
+             <response code="200">Dados do cliente</response>
+             <response code="400">ID informado inválido</response>
+             <response code="404">Cliente não encontrado</response>
+        </member>
+        <member name="M:AirLiquide_Test.API.Controllers.ClientesController.Post(AirLiquide_Test.Domain.Dtos.ClienteForCreateUpdateDto)">
+             <summary>
+             Cria um novo cliente
+             </summary>
+             <remarks>
+             Exemplo do request:
+            
+                 POST /api/clientes
+                 {
+                    "nome": "Nome do Cliente",
+                    "idade": 50
+                 }
+            
+             </remarks>
+             <param name="clienteForCreateDto">Informações do cliente</param>
+             <response code="201">Cliente criado com sucesso</response>
+             <response code="400">Informações inconsistentes do cliente</response>
+             <response code="409">Erro no processo de criação do cliente</response>
+        </member>
+        <member name="M:AirLiquide_Test.API.Controllers.ClientesController.Put(System.String,AirLiquide_Test.Domain.Dtos.ClienteForCreateUpdateDto)">
+             <summary>
+             Atualiza os dados de um cliente
+             </summary>
+             <remarks>
+             Exemplo do request:
+            
+                 PUT /api/clientes/b50adf00-4808-4240-9ec6-e86bd8c7b9cb
+                 {
+                    "nome": "Nome do Cliente",
+                    "idade": 50
+                 }
+            
+             </remarks>
+             <param name="id">Identificador único do cliente</param>
+             <param name="clienteForUpdateDto">Informações do cliente</param>
+             <response code="204">Cliente atualizado com sucesso</response>
+             <response code="400">Informações inconsistentes do cliente</response>
+             <response code="422">Erro no processo de atualização do cliente</response>
+        </member>
+        <member name="M:AirLiquide_Test.API.Controllers.ClientesController.Delete(System.String)">
+             <summary>
+             Remove um cliente com base no ID
+             </summary>
+             <remarks>
+             Exemplo do request:
+            
+                 DELETE /api/clientes/b50adf00-4808-4240-9ec6-e86bd8c7b9cb
+            
+             </remarks>
+             <param name="id">Identificador único do cliente</param>
+             <response code="204">Cliente removido com sucesso</response>
+             <response code="400">ID informado inválido</response>
+             <response code="404">Cliente não encontrado</response>
         </member>
     </members>
 </doc>
