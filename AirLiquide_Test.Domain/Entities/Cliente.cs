@@ -1,9 +1,8 @@
 ﻿using AirLiquide_Test.Domain.Dtos;
-using System;
 
 namespace AirLiquide_Test.Domain.Entities
 {
-    public class Cliente
+    public class Cliente : BaseEntity
     {
         public Cliente()
         {
@@ -15,7 +14,6 @@ namespace AirLiquide_Test.Domain.Entities
             Idade = idade;
         }
 
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public int Idade { get; set; }
 

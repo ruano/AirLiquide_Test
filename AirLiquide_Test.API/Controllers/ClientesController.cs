@@ -1,9 +1,9 @@
 ﻿using AirLiquide_Test.API.Configuration.ErrorResponses;
+using AirLiquide_Test.API.Configuration.Validations;
 using AirLiquide_Test.Domain.Dtos;
 using AirLiquide_Test.Domain.Interfaces;
 using AirLiquide_Test.Domain.Responses;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -38,7 +38,7 @@ namespace AirLiquide_Test.API.Controllers
         [ProducesResponseType(typeof(ClienteForDetailsDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> Get([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id)
+        public async Task<IActionResult> Get([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id)
         {
             ClienteResponse clienteResponse = await _clienteService.Get(id);
 
@@ -105,7 +105,7 @@ namespace AirLiquide_Test.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.UnprocessableEntity)]
-        public async Task<IActionResult> Put([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id, [FromBody] ClienteForCreateUpdateDto clienteForUpdateDto)
+        public async Task<IActionResult> Put([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id, [FromBody] ClienteForCreateUpdateDto clienteForUpdateDto)
         {
             ClienteResponse clienteResponse = await _clienteService.Update(id, clienteForUpdateDto);
 
@@ -134,7 +134,7 @@ namespace AirLiquide_Test.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType(typeof(CustomBadRequestResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> Delete([StringLength(36, ErrorMessage = "ID inválido", MinimumLength = 36)] string id)
+        public async Task<IActionResult> Delete([GuidValidation(ErrorMessage = "O valor GUID é inválido")] string id)
         {
             ClienteResponse clienteResponse = await _clienteService.Remove(id);
 

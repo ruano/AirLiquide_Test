@@ -2,6 +2,7 @@
 using AirLiquide_Test.Domain.Entities;
 using AirLiquide_Test.Domain.Interfaces;
 using AirLiquide_Test.Domain.Responses;
+using System;
 using System.Threading.Tasks;
 
 namespace AirLiquide_Test.API.Services
@@ -17,7 +18,7 @@ namespace AirLiquide_Test.API.Services
 
         public async Task<ClienteResponse> Get(string id)
         {
-            Cliente cliente = await _clienteRepository.FindByIdAsync(id);
+            Cliente cliente = await _clienteRepository.FindByIdAsync(Guid.Parse(id));
 
             return cliente == null
                 ? new ClienteResponse("Cliente não encontrado.")
@@ -40,7 +41,7 @@ namespace AirLiquide_Test.API.Services
 
         public async Task<ClienteResponse> Update(string id, ClienteForCreateUpdateDto clienteForUpdateDto)
         {
-            Cliente cliente = await _clienteRepository.FindByIdAsync(id);
+            Cliente cliente = await _clienteRepository.FindByIdAsync(Guid.Parse(id));
 
             if (cliente == null)
             {
@@ -63,7 +64,7 @@ namespace AirLiquide_Test.API.Services
 
         public async Task<ClienteResponse> Remove(string id)
         {
-            Cliente cliente = await _clienteRepository.FindByIdAsync(id);
+            Cliente cliente = await _clienteRepository.FindByIdAsync(Guid.Parse(id));
 
             if (cliente == null)
             {

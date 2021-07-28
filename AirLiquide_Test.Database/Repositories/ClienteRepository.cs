@@ -5,41 +5,15 @@ using System.Threading.Tasks;
 
 namespace AirLiquide_Test.Database.Repositories
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository : BaseRepository<Cliente>, IClienteRepository
     {
-        private readonly DatabaseContext _databaseContext;
-
-        public ClienteRepository(DatabaseContext databaseContext)
+        public ClienteRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
-            _databaseContext = databaseContext;
-        }
-
-        public async Task<Cliente> FindByIdAsync(string id)
-        {
-            return await _databaseContext.Clientes.FirstOrDefaultAsync(c => c.Id.ToString() == id);
         }
 
         public async Task<Cliente> FindByNameAsync(string name)
         {
-            return await _databaseContext.Clientes.FirstOrDefaultAsync(c => c.Nome.ToLower().Equals(name.ToLower()));
-        }
-
-        public async Task AddOneAsync(Cliente cliente)
-        {
-            await _databaseContext.Clientes.AddAsync(cliente);
-            await _databaseContext.SaveChangesAsync();
-        }
-
-        public async Task UpdateOneAsync(Cliente cliente)
-        {
-            _databaseContext.Clientes.Update(cliente);
-            await _databaseContext.SaveChangesAsync();
-        }
-
-        public async Task RemoveOneAsync(Cliente cliente)
-        {
-            _databaseContext.Clientes.Remove(cliente);
-            await _databaseContext.SaveChangesAsync();
+            return await DatabaseContext.Clientes.FirstOrDefaultAsync(c => c.Nome.ToLower().Equals(name.ToLower()));
         }
     }
 }
