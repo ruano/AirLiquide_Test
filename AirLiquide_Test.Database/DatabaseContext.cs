@@ -18,8 +18,9 @@ namespace AirLiquide_Test.Database
             {
                 c.ToTable("Cliente");
                 c.HasKey(p => p.Id);
-                c.Property(p => p.Id).ValueGeneratedOnAdd().HasValueGenerator<GuidGenerator>();
-                c.Property(p => p.Nome).HasMaxLength(100);
+                c.Property(p => p.Id).ValueGeneratedOnAdd().HasValueGenerator<GuidGenerator>().IsRequired();
+                c.Property(p => p.Nome).HasMaxLength(100).IsRequired();
+                c.Property(p => p.Idade).IsRequired();
             });
         }
     }

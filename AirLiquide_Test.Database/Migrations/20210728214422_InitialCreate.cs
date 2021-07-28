@@ -12,7 +12,7 @@ namespace AirLiquide_Test.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Idade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
