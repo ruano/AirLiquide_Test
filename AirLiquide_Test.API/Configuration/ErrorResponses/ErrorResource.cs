@@ -15,16 +15,19 @@ namespace AirLiquide_Test.API.Configuration.ErrorResponses
 
             foreach (KeyValuePair<string, ModelStateEntry> keyModelStatePair in context.ModelState)
             {
-                FieldErrorDetails fieldErrorDetails = new();
-                fieldErrorDetails.Field = keyModelStatePair.Key;
-
-                ModelErrorCollection errors = keyModelStatePair.Value.Errors;
-                foreach (ModelError error in errors)
+                if (keyModelStatePair.Value.Errors.Count > 0)
                 {
-                    fieldErrorDetails.Messages.Add(error.ErrorMessage);
-                }
+                    FieldErrorDetails fieldErrorDetails = new();
+                    fieldErrorDetails.Field = keyModelStatePair.Key;
 
-                Errors.Add(fieldErrorDetails);
+                    ModelErrorCollection errors = keyModelStatePair.Value.Errors;
+                    foreach (ModelError error in errors)
+                    {
+                        fieldErrorDetails.Messages.Add(error.ErrorMessage);
+                    }
+
+                    Errors.Add(fieldErrorDetails);
+                }
             }
         }
 

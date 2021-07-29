@@ -13,24 +13,24 @@ namespace AirLiquide_Test.Database.Repositories
             DatabaseContext = databaseContext;
         }
 
-        public async Task<T> FindByIdAsync(Guid id)
+        public virtual async Task<T> FindByIdAsync(Guid id)
         {
             return await DatabaseContext.FindAsync<T>(id);
         }
 
-        public async Task AddOneAsync(T entity)
+        public virtual async Task AddOneAsync(T entity)
         {
             await DatabaseContext.AddAsync(entity);
             await DatabaseContext.SaveChangesAsync();
         }
 
-        public async Task UpdateOneAsync(T entity)
+        public virtual async Task UpdateOneAsync(T entity)
         {
             DatabaseContext.Update(entity);
             await DatabaseContext.SaveChangesAsync();
         }
 
-        public async Task RemoveOneAsync(T entity)
+        public virtual async Task RemoveOneAsync(T entity)
         {
             DatabaseContext.Remove(entity);
             await DatabaseContext.SaveChangesAsync();
